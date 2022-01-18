@@ -21,7 +21,7 @@ $("#btnSalvar").click(function () {
 
     $.ajax(
         {
-            url: "gerador.php",
+            url: "php/gerador.php",
             data: {dado:jsonEnviar},   
             type:'POST',
         });

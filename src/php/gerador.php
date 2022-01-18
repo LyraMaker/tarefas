@@ -1,4 +1,5 @@
 <?php
+namespace LyraMaker\src\php;
 
 $doFront = $_POST["dado"];
 

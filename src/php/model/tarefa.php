@@ -2,45 +2,47 @@
 
 namespace LyraMaker\src\php\model;
 
-class Tarefas
+class Tarefa
 {
-    private ?int $cod;
+ //   private ?int $cod;
     private string $nome;
     private string $descricao;
-    private string $dataInicio;
-    private string $dataFim;
+    private \DateTimeInterface $dataInicio;
+    private \DateTimeInterface $dataFim;
     private string $urgencia;
     private bool $concluida;
 
-    function __construct(?int $cod, string $nome, string $descricao, string $dataInicio, string $dataFim, string $urgencia)
+    function __construct(string $nome, string $descricao, \DateTimeInterface $dataInicio, \DateTimeInterface $dataFim, string $urgencia)
     {
-        $this->setCod($cod);
+ //       $this->setCod($cod);
         $this->setNome($nome);
         $this->setDescricao($descricao);
         $this->setDataInicio($dataInicio);
         $this->setDataFim($dataFim);
         $this->setUrgencia($urgencia);
         $this->setConcluida(FALSE);
+
+        $this->printTarefa();
     }
 
-    public function getCod()
+/*    public function getCod()
     {
         return $this->cod;
     }
 
-    public function setCod($cod)
+    public function setCod(string $cod)
     {
         $this->cod = $cod;
 
         return $this;
     }
-
+**/
     public function getNome()
     {
         return $this->nome;
     }
 
-    public function setNome($nome)
+    public function setNome (string $nome)
     {
         $this->nome = $nome;
 
@@ -52,7 +54,7 @@ class Tarefas
         return $this->descricao;
     }
 
-    public function setDescricao($descricao)
+    public function setDescricao(string $descricao)
     {
         $this->descricao = $descricao;
 
@@ -64,7 +66,7 @@ class Tarefas
         return $this->dataInicio;
     }
 
-    public function setDataInicio($dataInicio)
+    public function setDataInicio(\DateTimeInterface $dataInicio)
     {
         $this->dataInicio = $dataInicio;
 
@@ -76,7 +78,7 @@ class Tarefas
         return $this->dataFim;
     }
 
-    public function setDataFim($dataFim)
+    public function setDataFim(\DateTimeInterface $dataFim)
     {
         $this->dataFim = $dataFim;
 
@@ -88,7 +90,7 @@ class Tarefas
         return $this->urgencia;
     }
 
-    public function setUrgencia($urgencia)
+    public function setUrgencia(string $urgencia)
     {
         $this->urgencia = $urgencia;
 
@@ -100,10 +102,29 @@ class Tarefas
         return $this->concluida;
     }
 
-    public function setConcluida($concluida)
+    public function setConcluida(bool $concluida)
     {
         $this->concluida = $concluida;
 
         return $this;
     }
+
+     public function prazo():int{
+         $vAtual =  new \DateTime(date('d-m-Y'));
+         $vFim = $this->getDataFim();
+
+         $dias = $vAtual->diff($vFim)->days;
+
+         return $dias;
+     }
+
+     public function printTarefa(){
+        echo $this->getNome().PHP_EOL;
+        echo $this->getDescricao().PHP_EOL;
+        echo $this->getDataInicio().PHP_EOL;
+        echo $this->getDataFim().PHP_EOL;
+        echo $this->getUrgencia().PHP_EOL;
+        echo $this->getConcluida().PHP_EOL;
+        echo $this->prazo().PHP_EOL;
+     }
 }

@@ -20,9 +20,8 @@ class Tarefa
         $this->setDataInicio($dataInicio);
         $this->setDataFim($dataFim);
         $this->setUrgencia($urgencia);
-        $this->setConcluida(FALSE);
-
-        $this->printTarefa();
+        $this->setConcluida(false);
+  
     }
 
 /*    public function getCod()
@@ -63,7 +62,7 @@ class Tarefa
 
     public function getDataInicio()
     {
-        return $this->dataInicio;
+        return $this->dataInicio->format('d-m-Y');
     }
 
     public function setDataInicio(\DateTimeInterface $dataInicio)
@@ -75,7 +74,7 @@ class Tarefa
 
     public function getDataFim()
     {
-        return $this->dataFim;
+        return $this->dataFim->format('d-m-Y');
     }
 
     public function setDataFim(\DateTimeInterface $dataFim)
@@ -97,7 +96,7 @@ class Tarefa
         return $this;
     }
 
-    public function getConcluida()
+    public function getConcluida():bool
     {
         return $this->concluida;
     }
@@ -109,9 +108,9 @@ class Tarefa
         return $this;
     }
 
-     public function prazo():int{
-         $vAtual =  new \DateTime(date('d-m-Y'));
-         $vFim = $this->getDataFim();
+     public function prazo(){
+         $vAtual =  new \DateTimeImmutable(date('d-m-Y'));
+         $vFim = new \DateTimeImmutable($this->getDataFim());
 
          $dias = $vAtual->diff($vFim)->days;
 
